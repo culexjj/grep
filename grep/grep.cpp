@@ -33,6 +33,7 @@ void BuscarEnFich(char* nombrefich, char* cadena)
     if ( control != 0)
     {
         perror(nombrefich);
+        printf("error");
         return;
     }
 
@@ -41,7 +42,7 @@ void BuscarEnFich(char* nombrefich, char* cadena)
     {
         nrolinea++;
         if (BuscarCadena(linea, cadena))
-            printf("%s[%d]: %s", nombrefich, nrolinea, linea);
+            printf("%s[%d]: %s\n", nombrefich, nrolinea, linea);
     }
     fclose(pf);
 }

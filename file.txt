@@ -1,0 +1,20 @@
+Cambiar discos de IDE a AHCI después de instalado Windows17:35 09/12/2010, José Antonio Quílez, Un Blog de Windows
+Como es sabido, los discos SATA pueden funcionar tanto en un modo en que solo usan las funciones de los discos PATA de siempre, como, en las placas con chipset Intel, en un modo (AHCI, Advanced Host Controller Interface) en el que se tiene acceso a nuevas funcionalidades de los discos SATA como son NCQ (Native Command Queue) o la conexión/desconexión de discos en caliente (muy usado con discos eSATA).
+
+Debido a que los fabricantes de placas quieren maximizar la compatibilidad, en muchos casos los valores por defecto de la BIOS configuran éstas para que los discos SATA se comporten como discos IDE tradicionales, con lo que perdemos estas características avanzadas del interfaz SATA, y, en algunos casos, algo de rendimiento (esto no siempre es apreciable).
+
+En estos casos, si nos lanzamos a instalar Windows sin haber mirado antes como están estos valores en la BIOS, y están en modo de emulación IDE, la instalación de Windows se configurará para cargar estos drivers en el arranque del sistema, y no los AHCI correspondientes a los SATA en modo avanzado.
+
+Si después nos damos cuenta y tras reiniciar cambiamos el valor en la BIOS de IDE a AHCI, nos llevaremos la sorpresa de que nos sale una pantalla azul con el código de error 0x0000005B, ya que Windows no puede leer del disco duro al no tener activado el driver AHCI, ahora necesario tras el cambio en la BIOS.
+
+Sin embargo, la solución es fácil: primero volvemos a editar la BIOS y dejar la configuración de discos como antes, en modo emulación IDE (o como lo llama la BIOS, que puede también ponerlo como PATA o similar).
+
+Una vez vuelto a arrancar Windows, editamos el registro y nos posicionamos en la siguiente clave:
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\msahci
+
+localizamos el valor REG_DWORD “Start” y cambiamos su valor a “0” (seguramente estará en “3”).
+
+A continuación reiniciamos el equipo y editamos la BIOS, configurando, ahora sí, los discos en modo AHCI y dejando que Windows reinicie ya con los discos en este modo.
+
+Si en lugar de controladora AHCI de Intel estamos usando un RAID o una controladora diferente, antes del cambio tenemos que localizar cual es la rama del registro bajo CurrentControlSet\services correspondiente al controlador (para RAIDs de Intel suele ser iaStor o iaStorV), y modificar el mismo valor “Start” a “0” como hemos hecho en el caso de AHCI.
