@@ -42,7 +42,7 @@ void BuscarEnFich(char* nombrefich, char* cadena)
     {
         nrolinea++;
         if (BuscarCadena(linea, cadena))
-            printf("%s[%d]: %s\n", nombrefich, nrolinea, linea);
+            printf("\n %s[% d]: % s\n", nombrefich, nrolinea, linea);
     }
     fclose(pf);
 }
