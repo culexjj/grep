@@ -11,11 +11,11 @@
 
 int BuscarCadena(char* cadena1, char* cadena2)
 {
-    // ¿cadena2 está contenida en cadena1?
+    // Â¿cadena2 estÃ¡ contenida en cadena1?
     if (strstr(cadena1, cadena2))
-        return 1; // se encontró
+        return 1; // se encontrÃ³
     else
-        return 0; // no se encontró
+        return 0; // no se encontrÃ³
 }
 
 void BuscarEnFich(char* nombrefich, char* cadena)
@@ -42,7 +42,7 @@ void BuscarEnFich(char* nombrefich, char* cadena)
     {
         nrolinea++;
         if (BuscarCadena(linea, cadena))
-            printf("\n %s[% d]: % s\n", nombrefich, nrolinea, linea);
+            printf("\n%s[%d]: %s\n", nombrefich, nrolinea, linea);
     }
     fclose(pf);
 }
@@ -51,14 +51,14 @@ int main(int argc, char* argv[])
 {
     int i;
 
-    // Verificar el número de argumentos
+    // Verificar el nÃºmero de argumentos
     if (argc < 3)
     {
         printf("Sintaxis: %s palabra f1 f2 ... fn\n", argv[0]);
         exit(-1);
     }
 
-    // Llamar a la función BuscarEnFich por cada fichero
+    // Llamar a la funciÃ³n BuscarEnFich por cada fichero
     for (i = 2; i < argc; i++)
         BuscarEnFich(argv[i], argv[1]);
 }
