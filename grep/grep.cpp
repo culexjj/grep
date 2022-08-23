@@ -1,5 +1,6 @@
 // grep.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // grep.exe string to look file1 file2 ....
+// ........................................
 
 
 /********** Search char string on file/s **********/
